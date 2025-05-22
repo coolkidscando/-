@@ -1,39 +1,80 @@
-ออกแบบระบบเช็คชื่อนักเรียนให้สวยงาม ใช้งานง่าย โดยมีรายละเอียดดังนี้:
- รูปแบบทั่วไป:
-พื้นหลังสีขาว ใช้โทนสีหลักเป็น สีน้ำเงิน (โทนสุภาพ)
-ตรงกลางหน้าจอ แสดง โลโก้https://www.kruchiangrai.net/wp-content/uploads/2021/02/%E0%B8%95%E0%B8%A3%E0%B8%B2%E0%B8%AA%E0%B8%B1%E0%B8%8D%E0%B8%A5%E0%B8%B1%E0%B8%81%E0%B8%A9%E0%B8%93%E0%B9%8C-%E0%B8%AA%E0%B8%9E%E0%B8%90..png ขนาด 200px
-ใต้โลโก้ มีหัวข้อชื่อระบบ:
-ข้อความว่า:
-"ระบบเช็คชื่อนักเรียน โรงเรียนวัดคลองพลู"
-ใช้ฟอนต์ชัดเจน สีสีน้ำเงิน เข้ม-อ่อน ตัดกันอย่างสวยงาม
- หน้าหลัก:
-แสดงปุ่มเลือกระดับชั้นเรียน:
-ปุ่มแบบกลม หรือมีมุมมน สีน้ำเงิน 7 ปุ่ม:
-ป.1/1,ป.1/2, ป.2, ป.3, ป.4, ป.5, ป.6
-แต่ละปุ่มเมื่อคลิกจะนำไปยังหน้ารายชื่อนักเรียนของระดับชั้นนั้น
-ปุ่มเพิ่มเติมในหน้าหลัก:
-"ดูภาพรวมการมาเรียนของทั้งโรงเรียน" (ปุ่มใหญ่ ดึงดูด)
- หน้าระดับชั้น (เช่น ป.4):
-แสดงฟอร์มควบคุมการเช็คชื่อ:
-ปุ่มเลือกวันที่ (Date Picker)
-ปุ่ม "นำเข้ารายชื่อจาก Excel"
-ปุ่ม "เพิ่ม", "ลบ", "แก้ไข" รายชื่อนักเรียน (สีน้ำเงิน / เทาไล่เฉด)
-ตารางแสดงรายชื่อนักเรียน พร้อม ช่องเลือกสถานะ:
-ตัวเลือกสถานะ:
- มา,  ป่วย,  ลา,  ขาด
-(ใช้ไอคอนและสีอ่อน เช่น เขียว ฟ้า เหลือง แดง)
-ปุ่มบันทึกข้อมูล (ขนาดใหญ่ สีเด่นด้านล่าง)
- หน้าสรุปการมาเรียน:
-ผู้ใช้สามารถเลือกดูสรุปได้จาก:
-วันที่
-ภาพรวมทั้งระดับชั้น
-ข้อมูลแสดงในรูปแบบ:
-ตารางสรุป
-กราฟแท่ง หรือกราฟวงกลม (หากต้องการแสดงภาพรวม)
- หน้ารวมภาพรวมโรงเรียน:
-สรุปการมาเรียนของทุกระดับชั้น
-สามารถ เลือกดูแยกได้:
-รายห้อง
-รายวัน
-รายเดือน
-ออกแบบให้อ่านง่าย เหมาะสำหรับผู้บริหารหรือครูใหญ่ดูภาพรวม
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ระบบเช็คชื่อนักเรียน</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #ffffff;
+      color: #003366;
+      text-align: center;
+    }
+    .container {
+      padding: 20px;
+    }
+    img.logo {
+      width: 200px;
+      margin-top: 20px;
+    }
+    h1 {
+      font-size: 32px;
+      margin: 10px 0;
+      color: #003366;
+    }
+    .subtitle {
+      font-size: 20px;
+      color: #336699;
+      margin-bottom: 30px;
+    }
+    .button-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px 0;
+    }
+    .grade-button, .overview-button {
+      padding: 15px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      background-color: #3366cc;
+      color: white;
+      transition: background-color 0.3s;
+    }
+    .grade-button:hover, .overview-button:hover {
+      background-color: #254b8b;
+    }
+    .overview-button {
+      padding: 20px 30px;
+      font-size: 20px;
+      background-color: #0044cc;
+      border-radius: 30px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="logo" src="https://www.kruchiangrai.net/wp-content/uploads/2021/02/%E0%B8%95%E0%B8%A3%E0%B8%B2%E0%B8%AA%E0%B8%B1%E0%B8%8D%E0%B8%A5%E0%B8%B1%E0%B8%81%E0%B8%A9%E0%B8%93%E0%B9%8C-%E0%B8%AA%E0%B8%9E%E0%B8%90..png" alt="โลโก้โรงเรียน" />
+    <h1>ระบบเช็คชื่อนักเรียน</h1>
+    <div class="subtitle">โรงเรียนวัดคลองพลู</div>
+
+    <div class="button-grid">
+      <button class="grade-button">ป.1/1</button>
+      <button class="grade-button">ป.1/2</button>
+      <button class="grade-button">ป.2</button>
+      <button class="grade-button">ป.3</button>
+      <button class="grade-button">ป.4</button>
+      <button class="grade-button">ป.5</button>
+      <button class="grade-button">ป.6</button>
+    </div>
+
+    <button class="overview-button">ดูภาพรวมการมาเรียนของทั้งโรงเรียน</button>
+  </div>
+</body>
+</html>
